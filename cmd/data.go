@@ -4,6 +4,8 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
+	"go.mod/entity"
+	"go.mod/rest"
 )
 
 func DataRoutr() http.Handler {
@@ -14,7 +16,12 @@ func DataRoutr() http.Handler {
 }
 
 func dataCreateHandler(w http.ResponseWriter, r *http.Request) {
-
+	ctx := r.Context()
+	var body entity.Data
+	if err := rest.ParseBody(w, r, &body); err != nil {
+		rest.SendError(w, err)
+		return
+	}
 }
 
 func dataGetHandler(w http.ResponseWriter, r *http.Request) {
