@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
+	"go.mod/core"
 	"go.mod/entity"
 	"go.mod/rest"
 )
@@ -22,6 +23,12 @@ func dataCreateHandler(w http.ResponseWriter, r *http.Request) {
 		rest.SendError(w, err)
 		return
 	}
+	err := core.DataManagerNew().DataCreateInfo(ctx, body)
+	if err != nil {
+		rest.SendError(w, err)
+		return
+	}
+
 }
 
 func dataGetHandler(w http.ResponseWriter, r *http.Request) {
