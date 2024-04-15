@@ -55,3 +55,11 @@ CREATE TABLE WeightHive (
     Time TIMESTAMP NOT NULL,
     FOREIGN KEY (IdExterno) REFERENCES Hive(IdExterno)
 );
+
+
+CREATE TABLE apiary(
+    IdExterno VARCHAR(255) NOT NULL,
+    Name VARCHAR NOT NULL,
+    Slug VARCHAR(255) NOT NULL,
+
+)
