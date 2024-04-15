@@ -14,7 +14,6 @@ require (
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
-	github.com/huandu/facebook v2.3.1+incompatible // indirect
 	github.com/lib/pq v1.1.0 // indirect
 	github.com/matttproud/golang_protobuf_extensions/v2 v2.0.0 // indirect
 	github.com/newrelic/go-agent/v3 v3.3.0 // indirect

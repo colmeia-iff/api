@@ -2,11 +2,12 @@ package core
 
 import (
 	"context"
-	"fmt"
+	"log"
 
 	"go.mod/db"
 	"go.mod/entity"
 	"go.mod/middleware"
+
 	"go.mod/rest"
 )
 
@@ -17,9 +18,12 @@ func NewUserManager() *UserManager {
 	return &UserManager{}
 }
 
-func (um *UserManager) User(ctx context.Context) (*entity.User, error) {
-	fmt.Println("teste mateus henrique")
-	return nil, nil
+func (um *UserManager) User(ctx context.Context, id string) (*entity.UserInfoView, error) {
+	userinfo, err := db.ReturnUserById(ctx, id)
+	if err != nil {
+		return nil, rest.LogError(err)
+	}
+	return userinfo, nil
 }
 func (um *UserManager) CreateUser(ctx context.Context, user entity.User) error {
 	err := db.Create(ctx, user)
@@ -34,15 +38,16 @@ func (*UserManager) Login(ctx context.Context, email, password string) (string, 
 	// Aqui, estou usando uma função fictícia chamada VerifyCredentials como exemplo.
 	user, err := db.VerifyCredentials(ctx, email, password)
 	if err != nil {
-		return "", err
+		return "", rest.LogError(err, "um.Login db.VerifyCredentials")
 	}
+	log.Println("teste agr")
 	body := &entity.User{
 		ID:    user.ID,
 		Email: user.Email,
 	}
 	token, err := middleware.GenerateToken(body)
 	if err != nil {
-		return "", err
+		return "", rest.LogError(err, "middleware.generatetoken")
 	}
 	return token, nil
 }

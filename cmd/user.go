@@ -11,7 +11,7 @@ import (
 
 func UserRouter() http.Handler {
 	r := chi.NewRouter()
-	r.Get("/", userinfoHandler)
+	r.Get("/{id}", userinfoHandler)
 	r.Post("/", crateUserHandler)
 	r.Post("/login", loginHandler)
 	return r
@@ -33,7 +33,8 @@ func crateUserHandler(w http.ResponseWriter, r *http.Request) {
 
 func userinfoHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	send, err := core.NewUserManager().User(ctx)
+	id := chi.URLParam(r, "id")
+	send, err := core.NewUserManager().User(ctx, id)
 	if err != nil {
 		rest.SendError(w, err)
 		return
