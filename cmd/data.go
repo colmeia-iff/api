@@ -9,7 +9,7 @@ import (
 	"go.mod/rest"
 )
 
-func DataRoutr() http.Handler {
+func DataRouter() http.Handler {
 	r := chi.NewRouter()
 	r.Post("/", dataCreateHandler)
 	r.Get("/", dataGetHandler)

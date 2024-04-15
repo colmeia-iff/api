@@ -1,5 +1,5 @@
 CREATE TABLE users (
-    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    id SERIAL PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
     email_verification_key VARCHAR(255),
     email_verification_time TIMESTAMP,
@@ -14,23 +14,44 @@ CREATE TABLE users (
     street_number VARCHAR(20),
     complement VARCHAR(255),
     birthdate DATE,
-    gender ENUM('Male', 'Female', 'Other'),
+    gender varchar,
     cpf VARCHAR(14),
-    source TINYINT,
-    record_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    source SMALLINT,
+    record_date TIMESTAMP ,
     level INTEGER
 );
 
-CREATE TABLE user_sub_accounts (
-    id INT PRIMARY KEY,
-    name VARCHAR(255),
-    key_api VARCHAR(255) UNIQUE
+-- colmeia
+CREATE TABLE Hive (
+    IdExterno VARCHAR(255) NOT NULL,
+    Name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (IdExterno)
 );
 
-CREATE TABLE related_sub_accounts_in_master_user (
-    sub_account_id INT,
-    user_id INT,
-    PRIMARY KEY (sub_account_id, user_id),
-    FOREIGN KEY (sub_account_id) REFERENCES user_sub_accounts(id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+CREATE TABLE Moisture (
+    IdExterno VARCHAR(255) NOT NULL,
+    Temp VARCHAR(255) NOT NULL,
+    Time TIMESTAMP NOT NULL,
+    FOREIGN KEY (IdExterno) REFERENCES Hive(IdExterno)
+);
+
+CREATE TABLE OutsideTemperature (
+    IdExterno VARCHAR(255) NOT NULL,
+    Temp VARCHAR(255) NOT NULL,
+    Time TIMESTAMP NOT NULL,
+    FOREIGN KEY (IdExterno) REFERENCES Hive(IdExterno)
+);
+
+CREATE TABLE Temperature (
+    IdExterno VARCHAR(255) NOT NULL,
+    Temp VARCHAR(255) NOT NULL,
+    Time TIMESTAMP NOT NULL,
+    FOREIGN KEY (IdExterno) REFERENCES Hive(IdExterno)
+);
+
+CREATE TABLE WeightHive (
+    IdExterno VARCHAR(255) NOT NULL,
+    Value VARCHAR(255) NOT NULL,
+    Time TIMESTAMP NOT NULL,
+    FOREIGN KEY (IdExterno) REFERENCES Hive(IdExterno)
 );
