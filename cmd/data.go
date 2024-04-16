@@ -23,7 +23,7 @@ func dataCreateHandler(w http.ResponseWriter, r *http.Request) {
 		rest.SendError(w, err)
 		return
 	}
-	err := core.DataManagerNew().DataCreateInfo(ctx, body)
+	err := core.ApiaryManagerNew().DataCreateInfo(ctx, body)
 	if err != nil {
 		rest.SendError(w, err)
 		return

@@ -11,11 +11,11 @@ import (
 type DataManager struct {
 }
 
-func DataManagerNew() *DataManager {
-	return &DataManager{}
+func DataManagerNew() *ApiaryManager {
+	return &ApiaryManager{}
 }
 
-func (m *DataManager) DataCreateInfo(ctx context.Context, body entity.Data) error {
+func (m *ApiaryManager) DataCreateInfo(ctx context.Context, body entity.Data) error {
 	if err := db.CrateInfoDB(ctx, body); err != nil {
 		return rest.LogError(err, "m.DataCreateInfo")
 	}
