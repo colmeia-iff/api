@@ -12,7 +12,7 @@ import (
 func HiveRouter() http.Handler {
 	r := chi.NewRouter()
 	r.Post("/", hiveHandler)
-	r.Put("/{idExterno}", updatedDataHandler)
+	r.Post("/{idExterno}", updatedDataHandler)
 	r.Get("/", hiveReturnHandler)
 	return r
 }
