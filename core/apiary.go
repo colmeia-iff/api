@@ -23,3 +23,13 @@ func (m *ApiaryManager) Create(ctx context.Context, data entity.Apiary) error {
 	}
 	return nil
 }
+
+func (m *ApiaryManager) ReturnApiarys(ctx context.Context) ([]entity.Apiary, error) {
+	data, err := db.ReturnApiary(ctx)
+	if err != nil {
+		log.Println("ApiaryManager.Create db.ReturnApiary error err: ", err)
+		return nil, err
+	}
+
+	return data, nil
+}

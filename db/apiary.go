@@ -22,7 +22,7 @@ func ApiaryCreate(ctx context.Context, data entity.Apiary) error {
 	return nil
 }
 
-func ReturnApiary(ctx context.Context, data entity.Apiary) ([]entity.Apiary, error) {
+func ReturnApiary(ctx context.Context) ([]entity.Apiary, error) {
 	var body entity.Apiary
 	rows, err := infradb.Get().QueryContext(ctx, `select IdExterno ,Name, Slug from apiary;`)
 	if err != nil {
