@@ -4,7 +4,7 @@
 
 
 ## Envio de dados para a colmeia
-
+#### Os envios são feitos via metodo HTTP
 ```bash
 /hive/{idExterno}
 ```
