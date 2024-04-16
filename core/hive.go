@@ -22,3 +22,7 @@ func (m *HiveManager) Create(ctx context.Context, data entity.Hive) error {
 	}
 	return nil
 }
+
+func (m *HiveManager) ReturnInfos(ctx context.Context) ([]entity.Data, error) {
+
+}

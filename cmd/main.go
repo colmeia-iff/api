@@ -33,7 +33,8 @@ func main() {
 	})
 	r.Use(corsOptions.Handler)
 	r.Mount("/user", UserRouter())
-	r.Mount("/data", DataRouter())
+	r.Mount("/apiary", ApiaryRouter())
+	r.Mount("/hive", HiveRouter())
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "9999"

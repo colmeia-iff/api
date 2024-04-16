@@ -62,4 +62,4 @@ CREATE TABLE apiary(
     Name VARCHAR NOT NULL,
     Slug VARCHAR(255) NOT NULL,
 
-)
+);

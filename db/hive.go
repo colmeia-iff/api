@@ -59,3 +59,119 @@ func WeightHive(ctx context.Context, data entity.Weight) error {
 	}
 	return nil
 }
+
+func ReturnDataInfo(ctx context.Context, id string) (*entity.InfoData, error) {
+	var data entity.InfoData
+	err := infradb.Get().QueryRowContext(ctx, `select Name, Slug from hive where idExterno = $1 `, id).Scan(&data.Name, &data.Slug)
+	if err != nil {
+		return nil, err
+	}
+	return &data, nil
+}
+
+func GetTemperature(ctx context.Context, id string) ([]entity.Temperature, error) {
+	rows, err := infradb.Get().QueryContext(ctx, `
+		SELECT  Value, Time 
+		FROM Temperature 
+		WHERE idExterno = $1;
+	`, id)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var weights []entity.Temperature
+	for rows.Next() {
+		var temp entity.Temperature
+		if err := rows.Scan(&temp.Data.Temp, &temp.Data.Time); err != nil {
+			return nil, err
+		}
+		weights = append(weights, temp)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return weights, nil
+}
+
+func GetOutsideTemperature(ctx context.Context, id string) ([]entity.OutsideTemperature, error) {
+	rows, err := infradb.Get().QueryContext(ctx, `
+		SELECT  Value, Time 
+		FROM OutsideTemperature 
+		WHERE idExterno = $1;
+	`, id)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var data []entity.OutsideTemperature
+	for rows.Next() {
+		var dataifo entity.OutsideTemperature
+		if err := rows.Scan(&dataifo.Data.Temp, &dataifo.Data.Time); err != nil {
+			return nil, err
+		}
+		data = append(data, dataifo)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return data, nil
+}
+func GetWeightHive(ctx context.Context, id string) ([]entity.Weight, error) {
+	rows, err := infradb.Get().QueryContext(ctx, `
+		SELECT  Value, Time 
+		FROM WeightHive 
+		WHERE idExterno = $1;
+	`, id)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var weights []entity.Weight
+	for rows.Next() {
+		var weight entity.Weight
+		if err := rows.Scan(&weight.Value, &weight.Time); err != nil {
+			return nil, err
+		}
+		weights = append(weights, weight)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return weights, nil
+}
+
+func GetMoisture(ctx context.Context, id string) ([]entity.Moisture, error) {
+	rows, err := infradb.Get().QueryContext(ctx, `
+		SELECT  Value, Time 
+		FROM Moisture 
+		WHERE idExterno = $1;
+	`, id)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var Moistures []entity.Moisture
+	for rows.Next() {
+		var Moisture entity.Moisture
+		if err := rows.Scan(&Moisture.Data.Temp, &Moisture.Data.Time); err != nil {
+			return nil, err
+		}
+		Moistures = append(Moistures, Moisture)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return Moistures, nil
+}
