@@ -3,12 +3,19 @@ package entity
 import "time"
 
 type Hive struct {
-	IdExterno          string `json:"id_externo"`
+	IdExterno          string `json:"idExterno"`
 	Name               string `json:"name"`
 	Moisture           Moisture
 	OutsideTemperature OutsideTemperature
 	Temperature        Temperature
 	Weight             Weight
+}
+
+type HiveInitial struct {
+	IdExterno   string `json:"idExterno"`
+	Name        string `json:"name"`
+	Slug        string `json:"slug"`
+	Description string `json:"description"`
 }
 
 type Moisture struct {

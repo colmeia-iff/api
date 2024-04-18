@@ -1,7 +1,7 @@
 package entity
 
 type Apiary struct {
-	IdExterno string `json:"id_externo"`
-	Name      string `json:"name"`
-	Slug      string `json:"slug"`
+	Name  string `json:"name"`
+	Slug  string `json:"slug"`
+	Local string `json:"local"`
 }

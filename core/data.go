@@ -74,3 +74,12 @@ func (m *DataManager) ReturnInfos(ctx context.Context, id string) (*entity.DataI
 	return &data, nil
 
 }
+
+func (m *DataManager) HiveBySlug(ctx context.Context, slug string) ([]entity.HiveInitial, error) {
+	data, err := db.ReturnDataInfoBySlug(ctx, slug)
+	if err != nil {
+		log.Println("db.ReturnDataInfoBySlug err: ", err)
+		return nil, err
+	}
+	return data, nil
+}

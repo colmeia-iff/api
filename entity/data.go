@@ -8,8 +8,10 @@ type Data struct {
 }
 
 type InfoData struct {
-	Name string
-	Slug string
+	Name        string `json:"name"`
+	Slug        string `json:"slug"`
+	IdExterno   string `json:"idExterno"`
+	Description string `json:"description"`
 }
 
 type DataInfo struct {

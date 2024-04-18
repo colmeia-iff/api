@@ -15,14 +15,10 @@ func HiveManagerNew() *HiveManager {
 	return &HiveManager{}
 }
 
-func (m *HiveManager) Create(ctx context.Context, data entity.Hive) error {
+func (m *HiveManager) Create(ctx context.Context, data entity.InfoData) error {
 	if err := db.HiveCreate(ctx, data); err != nil {
 		log.Println("m *HiveManager db.HiveCreate err: ", err)
 		return err
 	}
 	return nil
-}
-
-func (m *HiveManager) ReturnInfos(ctx context.Context) ([]entity.Data, error) {
-
 }

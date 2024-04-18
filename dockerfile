@@ -17,10 +17,10 @@ COPY . .
 RUN go build -o build ./cmd/
 
 # Expose the port on which the application will run
-EXPOSE 3333
+EXPOSE 9999
 
 # Environment variables
-ENV ADDRESS=0.0.0.0 PORT=3333
+ENV ADDRESS=0.0.0.0 PORT=9999
 
 # Command to start the application
 CMD ["./build"]

@@ -7,23 +7,23 @@ import (
 	"go.mod/entity"
 )
 
-func HiveCreate(ctx context.Context, data entity.Hive) error {
-	_, err := infradb.Get().ExecContext(ctx, `INSERT INTO Hive (IdExterno, Name) VALUES ($1, $2);`)
+func HiveCreate(ctx context.Context, data entity.InfoData) error {
+	_, err := infradb.Get().ExecContext(ctx, `INSERT INTO Hive (IdExterno, Name, Slug, Description) VALUES ($1, $2, $3, $4);`, data.IdExterno, data.Name, data.Slug, data.Description)
 	if err != nil {
 		return err
 	}
-	if err := Moisture(ctx, data.Moisture); err != nil {
-		return err
-	}
-	if err := OutsideTemperature(ctx, data.OutsideTemperature); err != nil {
-		return err
-	}
-	if err := Temperature(ctx, data.Temperature); err != nil {
-		return err
-	}
-	if err := WeightHive(ctx, data.Weight); err != nil {
-		return err
-	}
+	// if err := Moisture(ctx, data.Moisture); err != nil {
+	// 	return err
+	// }
+	// if err := OutsideTemperature(ctx, data.OutsideTemperature); err != nil {
+	// 	return err
+	// }
+	// if err := Temperature(ctx, data.Temperature); err != nil {
+	// 	return err
+	// }
+	// if err := WeightHive(ctx, data.Weight); err != nil {
+	// 	return err
+	// }
 	return nil
 
 }
@@ -174,4 +174,18 @@ func GetMoisture(ctx context.Context, id string) ([]entity.Moisture, error) {
 	}
 
 	return Moistures, nil
+}
+
+func ReturnDataInfoBySlug(ctx context.Context, slug string) ([]entity.HiveInitial, error) {
+	var data entity.HiveInitial
+	var dataArray []entity.HiveInitial
+	rows, err := infradb.Get().QueryContext(ctx, `select idexterno, Name, Slug, Description  from hive where slug = $1 `, slug)
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		rows.Scan(&data.IdExterno, &data.Name, &data.Slug, &data.Description)
+		dataArray = append(dataArray, data)
+	}
+	return dataArray, nil
 }

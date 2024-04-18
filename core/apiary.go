@@ -3,6 +3,7 @@ package core
 import (
 	"context"
 	"log"
+	"strings"
 
 	"go.mod/db"
 	"go.mod/entity"
@@ -16,6 +17,7 @@ func ApiaryManagerNew() *ApiaryManager {
 }
 
 func (m *ApiaryManager) Create(ctx context.Context, data entity.Apiary) error {
+	data.Slug = strings.Replace(data.Name, " ", "", -1)
 	err := db.ApiaryCreate(ctx, data)
 	if err != nil {
 		log.Println("ApiaryManager.Create db.ApiaryCreate error err: ", err)

@@ -25,6 +25,8 @@ CREATE TABLE users (
 CREATE TABLE Hive (
     IdExterno VARCHAR(255) NOT NULL,
     Name VARCHAR(255) NOT NULL,
+    Description VARCHAR(255) NOT NULL,
+    Slug VARCHAR(255) NOT NULL,
     PRIMARY KEY (IdExterno)
 );
 
@@ -58,8 +60,8 @@ CREATE TABLE WeightHive (
 
 
 CREATE TABLE apiary(
-    IdExterno VARCHAR(255) NOT NULL,
     Name VARCHAR NOT NULL,
     Slug VARCHAR(255) NOT NULL,
+    Local VARCHAR NOT NULL
 
 );

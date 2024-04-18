@@ -9,12 +9,9 @@ import (
 
 func ApiaryCreate(ctx context.Context, data entity.Apiary) error {
 	_, err := infradb.Get().ExecContext(ctx, `
-	INSERT INTO apiary (IdExterno, Name, Slug)
-	VALUES
-		$1,
-		$2,
-		$3;
-	`, data.IdExterno, data.Name)
+		INSERT INTO apiary (Name, Slug, Local)
+		VALUES ($1, $2, $3)
+	`, data.Name, data.Slug, data.Local)
 	if err != nil {
 		return err
 	}
@@ -24,14 +21,14 @@ func ApiaryCreate(ctx context.Context, data entity.Apiary) error {
 
 func ReturnApiary(ctx context.Context) ([]entity.Apiary, error) {
 	var body entity.Apiary
-	rows, err := infradb.Get().QueryContext(ctx, `select IdExterno ,Name, Slug from apiary;`)
+	rows, err := infradb.Get().QueryContext(ctx, `select  name, slug , local from apiary;`)
 	if err != nil {
 		return nil, err
 	}
 
 	var array []entity.Apiary
 	for rows.Next() {
-		rows.Scan(&body.IdExterno, &body.Name, &body.Slug)
+		rows.Scan(&body.Name, &body.Slug, &body.Local)
 		array = append(array, body)
 	}
 	return array, nil

@@ -12,6 +12,7 @@ import (
 func ApiaryRouter() http.Handler {
 	r := chi.NewRouter()
 	r.Post("/", createApiaryHandler)
+	r.Get("/", returnApiaryHandler)
 
 	return r
 }
@@ -29,4 +30,16 @@ func createApiaryHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+}
+
+func returnApiaryHandler(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	manager := core.ApiaryManagerNew()
+	data, err := manager.ReturnApiarys(ctx)
+	if err != nil {
+		rest.SendError(w, err)
+		return
+	}
+
+	rest.Send(w, data)
 }
