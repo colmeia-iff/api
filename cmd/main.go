@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	chiprometheus "github.com/766b/chi-prometheus"
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/v5"
 	"github.com/rs/cors"
 )
 

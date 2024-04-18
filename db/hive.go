@@ -28,32 +28,32 @@ func HiveCreate(ctx context.Context, data entity.InfoData) error {
 
 }
 
-func Moisture(ctx context.Context, data entity.Moisture) error {
-	_, err := infradb.Get().ExecContext(ctx, `INSERT INTO Moisture (IdExterno, Temp, Time) VALUES ($1, $2, $3);`)
+func Moisture(ctx context.Context, data entity.Moisture, idExterno string) error {
+	_, err := infradb.Get().ExecContext(ctx, `INSERT INTO Moisture (IdExterno, Temp, Time) VALUES ($1, $2, NOW());`, idExterno, data.Data.Temp)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func OutsideTemperature(ctx context.Context, data entity.OutsideTemperature) error {
-	_, err := infradb.Get().ExecContext(ctx, `INSERT INTO OutsideTemperature (IdExterno, Temp, Time) VALUES ($1, $2, $3);`)
+func OutsideTemperature(ctx context.Context, data entity.OutsideTemperature, id string) error {
+	_, err := infradb.Get().ExecContext(ctx, `INSERT INTO OutsideTemperature (IdExterno, Temp, Time) VALUES ($1, $2, NOW());`, id, data.Data.Temp)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func Temperature(ctx context.Context, data entity.Temperature) error {
-	_, err := infradb.Get().ExecContext(ctx, `INSERT INTO Temperature (IdExterno, Temp, Time) VALUES ($1, $2, $3);`)
+func Temperature(ctx context.Context, data entity.Temperature, id string) error {
+	_, err := infradb.Get().ExecContext(ctx, `INSERT INTO Temperature (IdExterno, Temp, Time) VALUES ($1, $2, NOW());`, id, data.Data.Temp)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func WeightHive(ctx context.Context, data entity.Weight) error {
-	_, err := infradb.Get().ExecContext(ctx, `INSERT INTO WeightHive (IdExterno, Value, Time) VALUES ($1, $2,$3);`)
+func WeightHive(ctx context.Context, data entity.Weight, id string) error {
+	_, err := infradb.Get().ExecContext(ctx, `INSERT INTO WeightHive (IdExterno, Value, Time) VALUES ($1, $2,NOW());`, id, data.Value)
 	if err != nil {
 		return err
 	}
@@ -71,7 +71,7 @@ func ReturnDataInfo(ctx context.Context, id string) (*entity.InfoData, error) {
 
 func GetTemperature(ctx context.Context, id string) ([]entity.Temperature, error) {
 	rows, err := infradb.Get().QueryContext(ctx, `
-		SELECT  Value, Time 
+		SELECT  Temp, Time 
 		FROM Temperature 
 		WHERE idExterno = $1;
 	`, id)
@@ -98,9 +98,9 @@ func GetTemperature(ctx context.Context, id string) ([]entity.Temperature, error
 
 func GetOutsideTemperature(ctx context.Context, id string) ([]entity.OutsideTemperature, error) {
 	rows, err := infradb.Get().QueryContext(ctx, `
-		SELECT  Value, Time 
+		SELECT  Temp, Time 
 		FROM OutsideTemperature 
-		WHERE idExterno = $1;
+		WHERE idexterno = $1;
 	`, id)
 	if err != nil {
 		return nil, err
@@ -124,9 +124,10 @@ func GetOutsideTemperature(ctx context.Context, id string) ([]entity.OutsideTemp
 }
 func GetWeightHive(ctx context.Context, id string) ([]entity.Weight, error) {
 	rows, err := infradb.Get().QueryContext(ctx, `
-		SELECT  Value, Time 
-		FROM WeightHive 
-		WHERE idExterno = $1;
+	SELECT Value, Time 
+	FROM WeightHive 
+	WHERE IdExterno = $1;
+	
 	`, id)
 	if err != nil {
 		return nil, err
@@ -151,7 +152,7 @@ func GetWeightHive(ctx context.Context, id string) ([]entity.Weight, error) {
 
 func GetMoisture(ctx context.Context, id string) ([]entity.Moisture, error) {
 	rows, err := infradb.Get().QueryContext(ctx, `
-		SELECT  Value, Time 
+		SELECT  Temp, Time 
 		FROM Moisture 
 		WHERE idExterno = $1;
 	`, id)

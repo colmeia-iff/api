@@ -2,6 +2,7 @@ package core
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"go.mod/db"
@@ -15,20 +16,21 @@ func DataManagerNew() *DataManager {
 	return &DataManager{}
 }
 
-func (m *DataManager) DataCreateInfo(ctx context.Context, body entity.Data) error {
-	if err := db.Moisture(ctx, body.Moisture); err != nil {
+func (m *DataManager) DataCreateInfo(ctx context.Context, body entity.Data, id string) error {
+
+	if err := db.Moisture(ctx, body.Moisture, id); err != nil {
 		log.Println("db.Moisture m.DataCreateInfo err: ", err)
 		return err
 	}
-	if err := db.OutsideTemperature(ctx, body.OutsideTemperature); err != nil {
+	if err := db.OutsideTemperature(ctx, body.OutsideTemperature, id); err != nil {
 		log.Println("db.OutsideTemperature m.DataCreateInfo err: ", err)
 		return err
 	}
-	if err := db.Temperature(ctx, body.Temperature); err != nil {
+	if err := db.Temperature(ctx, body.Temperature, id); err != nil {
 		log.Println("db.Temperature m.DataCreateInfo err: ", err)
 		return err
 	}
-	if err := db.WeightHive(ctx, body.Weight); err != nil {
+	if err := db.WeightHive(ctx, body.Weight, id); err != nil {
 		log.Println("db.WeightHive m.DataCreateInfo err: ", err)
 		return err
 	}
@@ -36,6 +38,8 @@ func (m *DataManager) DataCreateInfo(ctx context.Context, body entity.Data) erro
 }
 
 func (m *DataManager) ReturnInfos(ctx context.Context, id string) (*entity.DataInfo, error) {
+	fmt.Println("teste", id)
+	log.Println("teste", id)
 	name, err := db.ReturnDataInfo(ctx, id)
 	if err != nil {
 		log.Println("db.ReturnDataInfo err: ", err)
