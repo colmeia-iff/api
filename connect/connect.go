@@ -83,12 +83,11 @@ func checkDBIsUp(db *sql.DB) error {
 
 // Get retorna uma conexão com o banco de dados (abre se necessário).
 func Get() *sql.DB {
-
 	dbMu.Lock()
 	defer dbMu.Unlock()
 	if DB == nil {
 		var err error
-		DB, err = newDB("postgresql://user:password@postgres:5432/database?sslmode=disable")
+		DB, err = newDB("postgresql://postgres:QzQCNzZmLquABUhcfTCQDegkdrtpMoTu@viaduct.proxy.rlwy.net:41200/railway")
 		if err != nil {
 			log.Fatalln("get db:", err.Error())
 		}
