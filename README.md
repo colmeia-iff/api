@@ -2,7 +2,11 @@
 # só de rodar a api já sobe o banco de dados
 - sudo docker-compose up --build
 
+## Rota principal da api
 
+```bash
+api-golang-production.up.railway.app
+```
 ## Envio de dados para a colmeia
 #### Os envios são feitos via metodo HTTP
 ```bash
