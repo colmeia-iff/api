@@ -1,4 +1,4 @@
-package load
+package main
 
 import (
 	"fmt"
@@ -10,7 +10,7 @@ import (
 	"github.com/rs/cors"
 )
 
-func Load() {
+func main() {
 	fmt.Println("Starting")
 
 	r := chi.NewRouter()
