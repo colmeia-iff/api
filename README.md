@@ -5,7 +5,7 @@
 ## Rota principal da api
 
 ```bash
-api-golang-production.up.railway.app
+https://api-golang-production-colmeia-iff.up.railway.app
 ```
 ## Envio de dados para a colmeia
 #### Os envios são feitos via metodo HTTP
