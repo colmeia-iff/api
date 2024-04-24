@@ -1,6 +1,6 @@
 [build]
 builder = "nixpacks"
-dockerfilepath="dockerfile"
+dockerfilepath="dockerfile.railway"
 
 [deploy]
 restartPolicyType = "ON_FAILURE"
