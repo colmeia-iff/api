@@ -1,6 +1,6 @@
 
 [build]
-builder = "DOCKERFILE"
+builder = "NIXPACKS"
 buildCommand = "docker-compose up --build"
 dockerfilepath="dockerfile"
 
