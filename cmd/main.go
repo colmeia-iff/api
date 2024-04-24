@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	chiprometheus "github.com/766b/chi-prometheus"
 	"github.com/go-chi/chi/v5"
@@ -23,8 +24,18 @@ func main() {
 	r.Mount("/apiary", ApiaryRouter())
 	r.Mount("/hive", HiveRouter())
 
-	port := "9999"
+	// Use envPortOr function to determine the port
+	port := envPortOr("9999")
 
-	fmt.Println("lissen port: ", port)
-	log.Fatal(http.ListenAndServe(":"+port, r))
+	fmt.Println("listen port: ", port)
+	log.Fatal(http.ListenAndServe(port, r))
+}
+
+// envPortOr returns PORT from environment if found, defaults to
+// value in `port` parameter otherwise.
+func envPortOr(port string) string {
+	if envPort := os.Getenv("PORT"); envPort != "" {
+		return ":" + envPort
+	}
+	return ":" + port
 }
