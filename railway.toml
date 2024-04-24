@@ -1,9 +1,6 @@
-
 [build]
-builder = "dockerfile"
-dockerfilepath="./dockerfile"
-
-
+builder = "DOCKERFILE"
+buildCommand = "docker-compose up --build"
 
 [deploy]
 numReplicas = 1
