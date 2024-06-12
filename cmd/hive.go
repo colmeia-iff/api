@@ -69,6 +69,14 @@ func updatedDataHandler(w http.ResponseWriter, r *http.Request) {
 		Weight: entity.Weight{
 			Value: data.Weight,
 		},
+		Melg: entity.Melg{
+			Data: entity.ValuesNew{
+				Values: data.WeightMel,
+			},
+		},
+		Voltage:    entity.Voltage{Data: entity.ValuesNew{Values: data.Volt}},
+		Resistance: entity.Resist{Data: entity.ValuesNew{Values: data.Tresist}},
+		Vento:      entity.Vento{Data: entity.ValuesNew{Values: data.TempVent}},
 	}
 	err := manager.DataCreateInfo(ctx, send, chi.URLParam(r, "idExterno"))
 	if err != nil {
