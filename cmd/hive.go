@@ -33,6 +33,7 @@ func hiveHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// rota de criacao dos dados
 func updatedDataHandler(w http.ResponseWriter, r *http.Request) {
 
 	type Data struct {
