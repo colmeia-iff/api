@@ -43,19 +43,19 @@ type ValuesNew struct {
 	Time   time.Time `json:"time"`
 }
 type Voltage struct {
-	Data ValuesNew `json:"data"`
+	Data ValuesNew
 }
 
 type Vento struct {
-	Data ValuesNew `json:"data"`
+	Data ValuesNew
 }
 
 type Melg struct {
-	Data ValuesNew `json:"data"`
+	Data ValuesNew
 }
 
 type Resist struct {
-	Data ValuesNew `json:"data"`
+	Data ValuesNew
 }
 type HiveReturn struct {
 	IdExterno          string `json:"id_externo"`
