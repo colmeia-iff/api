@@ -112,7 +112,7 @@ func (m *DataManager) ReturnInfos(ctx context.Context, id string) (*entity.DataI
 		Melg:               pm,
 		Vento:              vt,
 		Voltage:            vg,
-		Resistance:         r,
+		Resist:             r,
 	}
 
 	return &data, nil

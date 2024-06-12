@@ -28,5 +28,5 @@ type DataInfo struct {
 	Melg               []Melg
 	Voltage            []Voltage
 	Vento              []Vento
-	Resistance         []Resist
+	Resist             []Resist
 }
