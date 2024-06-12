@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/go-chi/chi/v5"
 	"go.mod/core"
@@ -33,18 +34,16 @@ func hiveHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
-// rota de criacao dos dados
 func updatedDataHandler(w http.ResponseWriter, r *http.Request) {
-
 	type Data struct {
-		Moisture           string `json:"uNinho"`
-		Temperature        string `json:"tNinho"`
-		OutsideTemperature string `json:"tExt"`
-		Weight             string `json:"pNinho"`
-		Volt               string `json:"vBat"`
-		WeightMel          string `json:"pMelg"`
-		TempVent           string `json:"tVent"`
-		Tresist            string `json:"tResist"`
+		Moisture           int `json:"uNinho"`
+		Temperature        int `json:"tNinho"`
+		OutsideTemperature int `json:"tExt"`
+		Weight             int `json:"pNinho"`
+		Volt               int `json:"vBat"`
+		WeightMel          int `json:"pMelg"`
+		TempVent           int `json:"tVent"`
+		Tresist            int `json:"tResist"`
 	}
 
 	var data Data
@@ -53,38 +52,42 @@ func updatedDataHandler(w http.ResponseWriter, r *http.Request) {
 		rest.SendError(w, err)
 		return
 	}
+
 	manager := core.DataManagerNew()
 	send := entity.Data{
 		Moisture: entity.Moisture{
 			Data: entity.Values{
-				Temp: data.Moisture,
+				Temp: strconv.Itoa(data.Moisture), // Conversão de int para string
 			},
 		},
 		OutsideTemperature: entity.OutsideTemperature{
-			Data: entity.Values{Temp: data.OutsideTemperature}},
+			Data: entity.Values{
+				Temp: strconv.Itoa(data.OutsideTemperature), // Conversão de int para string
+			},
+		},
 		Temperature: entity.Temperature{
 			Data: entity.Values{
-				Temp: data.Temperature,
+				Temp: strconv.Itoa(data.Temperature), // Conversão de int para string
 			},
 		},
 		Weight: entity.Weight{
-			Value: data.Weight,
+			Value: strconv.Itoa(data.Weight),
 		},
 		Melg: entity.Melg{
 			Data: entity.ValuesNew{
-				Values: data.WeightMel,
+				Values: strconv.Itoa(data.WeightMel), // Conversão de int para string
 			},
 		},
-		Voltage:    entity.Voltage{Data: entity.ValuesNew{Values: data.Volt}},
-		Resistance: entity.Resist{Data: entity.ValuesNew{Values: data.Tresist}},
-		Vento:      entity.Vento{Data: entity.ValuesNew{Values: data.TempVent}},
+		Voltage:    entity.Voltage{Data: entity.ValuesNew{Values: strconv.Itoa(data.Volt)}},   // Conversão de int para string
+		Resistance: entity.Resist{Data: entity.ValuesNew{Values: strconv.Itoa(data.Tresist)}}, // Conversão de int para string
+		Vento:      entity.Vento{Data: entity.ValuesNew{Values: strconv.Itoa(data.TempVent)}}, // Conversão de int para string
 	}
+
 	err := manager.DataCreateInfo(ctx, send, chi.URLParam(r, "idExterno"))
 	if err != nil {
 		rest.SendError(w, err)
 		return
 	}
-
 }
 
 func hiveReturnHandler(w http.ResponseWriter, r *http.Request) {

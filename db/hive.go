@@ -37,28 +37,28 @@ func Moisture(ctx context.Context, data entity.Moisture, idExterno string) error
 }
 
 func Vento(ctx context.Context, data entity.Vento, idExterno string) error {
-	_, err := infradb.Get().ExecContext(ctx, `INSERT INTO Vento (IdExterno, Temp, Time) VALUES ($1, $2, NOW());`, idExterno, data.Data.Time)
+	_, err := infradb.Get().ExecContext(ctx, `INSERT INTO Vento (IdExterno, Temp, Time) VALUES ($1, $2, NOW());`, idExterno, data.Data.Values)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 func Melg(ctx context.Context, data entity.Melg, idExterno string) error {
-	_, err := infradb.Get().ExecContext(ctx, `INSERT INTO Melg (IdExterno, Temp, Time) VALUES ($1, $2, NOW());`, idExterno, data.Data.Time)
+	_, err := infradb.Get().ExecContext(ctx, `INSERT INTO Melg (IdExterno, Temp, Time) VALUES ($1, $2, NOW());`, idExterno, data.Data.Values)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 func Volt(ctx context.Context, data entity.Voltage, idExterno string) error {
-	_, err := infradb.Get().ExecContext(ctx, `INSERT INTO Voltage (IdExterno, Temp, Time) VALUES ($1, $2, NOW());`, idExterno, data.Data.Time)
+	_, err := infradb.Get().ExecContext(ctx, `INSERT INTO Voltage (IdExterno, Temp, Time) VALUES ($1, $2, NOW());`, idExterno, data.Data.Values)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 func Resist(ctx context.Context, data entity.Resist, idExterno string) error {
-	_, err := infradb.Get().ExecContext(ctx, `INSERT INTO Resist (IdExterno, Temp, Time) VALUES ($1, $2, NOW());`, idExterno, data.Data.Time)
+	_, err := infradb.Get().ExecContext(ctx, `INSERT INTO Resist (IdExterno, Temp, Time) VALUES ($1, $2, NOW());`, idExterno, data.Data.Values)
 	if err != nil {
 		return err
 	}
@@ -233,7 +233,7 @@ func GetVento(ctx context.Context, id string) ([]entity.Vento, error) {
 	var vento []entity.Vento
 	for rows.Next() {
 		var ventos entity.Vento
-		if err := rows.Scan(&ventos.Data.Time, &ventos.Data.Time); err != nil {
+		if err := rows.Scan(&ventos.Data.Values, &ventos.Data.Time); err != nil {
 			return nil, err
 		}
 		vento = append(vento, ventos)
@@ -260,7 +260,7 @@ func GetMelg(ctx context.Context, id string) ([]entity.Melg, error) {
 	var melgs []entity.Melg
 	for rows.Next() {
 		var melg entity.Melg
-		if err := rows.Scan(&melg.Data.Time, &melg.Data.Time); err != nil {
+		if err := rows.Scan(&melg.Data.Values, &melg.Data.Time); err != nil {
 			return nil, err
 		}
 		melgs = append(melgs, melg)
@@ -287,7 +287,7 @@ func GetVolt(ctx context.Context, id string) ([]entity.Voltage, error) {
 	var vento []entity.Voltage
 	for rows.Next() {
 		var ventos entity.Voltage
-		if err := rows.Scan(&ventos.Data.Time, &ventos.Data.Time); err != nil {
+		if err := rows.Scan(&ventos.Data.Values, &ventos.Data.Time); err != nil {
 			return nil, err
 		}
 		vento = append(vento, ventos)
@@ -314,7 +314,7 @@ func GetResist(ctx context.Context, id string) ([]entity.Resist, error) {
 	var vento []entity.Resist
 	for rows.Next() {
 		var ventos entity.Resist
-		if err := rows.Scan(&ventos.Data.Time, &ventos.Data.Time); err != nil {
+		if err := rows.Scan(&ventos.Data.Values, &ventos.Data.Time); err != nil {
 			return nil, err
 		}
 		vento = append(vento, ventos)
