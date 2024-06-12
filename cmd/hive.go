@@ -36,10 +36,14 @@ func hiveHandler(w http.ResponseWriter, r *http.Request) {
 func updatedDataHandler(w http.ResponseWriter, r *http.Request) {
 
 	type Data struct {
-		Moisture           string `json:"moisture"`
-		Temperature        string `json:"temperature"`
-		OutsideTemperature string `json:"outsidetemperature"`
-		Weight             string `json:"weight"`
+		Moisture           string `json:"uNinho"`
+		Temperature        string `json:"tNinho"`
+		OutsideTemperature string `json:"tExt"`
+		Weight             string `json:"pNinho"`
+		Volt               string `json:"vBat"`
+		WeightMel          string `json:"pMelg"`
+		TempVent           string `json:"tVent"`
+		Tresist            string `json:"tResist"`
 	}
 
 	var data Data

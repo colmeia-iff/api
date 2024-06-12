@@ -38,6 +38,25 @@ type Values struct {
 	Time time.Time `json:"time"`
 }
 
+type ValuesNew struct {
+	Values string    `json:"values"`
+	Time   time.Time `json:"time"`
+}
+type Voltage struct {
+	Data ValuesNew `json:"data"`
+}
+
+type Vento struct {
+	Data ValuesNew `json:"data"`
+}
+
+type Melg struct {
+	Data ValuesNew `json:"data"`
+}
+
+type Resist struct {
+	Data ValuesNew `json:"data"`
+}
 type HiveReturn struct {
 	IdExterno          string `json:"id_externo"`
 	Name               string `json:"name"`
@@ -45,4 +64,8 @@ type HiveReturn struct {
 	OutsideTemperature []OutsideTemperature
 	Temperature        []Temperature
 	Weight             []Weight
+	Resist             []Resist
+	Voltage            []Voltage
+	Vento              []Vento
+	Melg               []Melg
 }

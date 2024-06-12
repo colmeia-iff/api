@@ -5,6 +5,10 @@ type Data struct {
 	OutsideTemperature OutsideTemperature
 	Temperature        Temperature
 	Weight             Weight
+	Melg               Melg
+	Voltage            Voltage
+	Vento              Vento
+	Resistance         Resist
 }
 
 type InfoData struct {
@@ -21,4 +25,8 @@ type DataInfo struct {
 	OutsideTemperature []OutsideTemperature
 	Temperature        []Temperature
 	Weight             []Weight
+	Melg               []Melg
+	Voltage            []Voltage
+	Vento              []Vento
+	Resistance         []Resist
 }

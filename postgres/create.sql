@@ -58,6 +58,33 @@ CREATE TABLE WeightHive (
     FOREIGN KEY (IdExterno) REFERENCES Hive(IdExterno)
 );
 
+CREATE TABLE Resist (
+    IdExterno VARCHAR(255) NOT NULL,
+    Temp VARCHAR(255) NOT NULL,
+    Time TIMESTAMP NOT NULL,
+    FOREIGN KEY (IdExterno) REFERENCES Hive(IdExterno)
+);
+
+CREATE TABLE Voltage (
+    IdExterno VARCHAR(255) NOT NULL,
+    Temp VARCHAR(255) NOT NULL,
+    Time TIMESTAMP NOT NULL,
+    FOREIGN KEY (IdExterno) REFERENCES Hive(IdExterno)
+);
+
+CREATE TABLE Melg (
+    IdExterno VARCHAR(255) NOT NULL,
+    Temp VARCHAR(255) NOT NULL,
+    Time TIMESTAMP NOT NULL,
+    FOREIGN KEY (IdExterno) REFERENCES Hive(IdExterno)
+);
+
+CREATE TABLE Vento (
+    IdExterno VARCHAR(255) NOT NULL,
+    Temp VARCHAR(255) NOT NULL,
+    Time TIMESTAMP NOT NULL,
+    FOREIGN KEY (IdExterno) REFERENCES Hive(IdExterno)
+);
 
 CREATE TABLE apiary(
     Name VARCHAR NOT NULL,
