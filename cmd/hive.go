@@ -42,8 +42,8 @@ func updatedDataHandler(w http.ResponseWriter, r *http.Request) {
 		Weight             float64 `json:"pNinho"`
 		Volt               float64 `json:"vBat"`
 		WeightMel          float64 `json:"pMelg"`
-		TempVent           float64 `json:"tVent"`
-		Tresist            float64 `json:"tResist"`
+		TempVent           string  `json:"tVent"`
+		Tresist            string  `json:"tResist"`
 	}
 
 	var data Data
@@ -78,9 +78,9 @@ func updatedDataHandler(w http.ResponseWriter, r *http.Request) {
 				Values: strconv.FormatFloat(data.WeightMel, 'f', 2, 64), // Conversão de int para string
 			},
 		},
-		Voltage:    entity.Voltage{Data: entity.ValuesNew{Values: strconv.FormatFloat(data.Volt, 'f', 2, 64)}},   // Conversão de int para string
-		Resistance: entity.Resist{Data: entity.ValuesNew{Values: strconv.FormatFloat(data.Tresist, 'f', 2, 64)}}, // Conversão de int para string
-		Vento:      entity.Vento{Data: entity.ValuesNew{Values: strconv.FormatFloat(data.TempVent, 'f', 2, 64)}}, // Conversão de int para string
+		Voltage:    entity.Voltage{Data: entity.ValuesNew{Values: strconv.FormatFloat(data.Volt, 'f', 2, 64)}}, // Conversão de int para string
+		Resistance: entity.Resist{Data: entity.ValuesNew{Values: data.Tresist}},                                // Conversão de int para string
+		Vento:      entity.Vento{Data: entity.ValuesNew{Values: data.TempVent}},                                // Conversão de int para string
 	}
 
 	err := manager.DataCreateInfo(ctx, send, chi.URLParam(r, "idExterno"))
