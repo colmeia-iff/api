@@ -36,14 +36,14 @@ func hiveHandler(w http.ResponseWriter, r *http.Request) {
 
 func updatedDataHandler(w http.ResponseWriter, r *http.Request) {
 	type Data struct {
-		Moisture           int `json:"uNinho"`
-		Temperature        int `json:"tNinho"`
-		OutsideTemperature int `json:"tExt"`
-		Weight             int `json:"pNinho"`
-		Volt               int `json:"vBat"`
-		WeightMel          int `json:"pMelg"`
-		TempVent           int `json:"tVent"`
-		Tresist            int `json:"tResist"`
+		Moisture           float64 `json:"uNinho"`
+		Temperature        float64 `json:"tNinho"`
+		OutsideTemperature float64 `json:"tExt"`
+		Weight             float64 `json:"pNinho"`
+		Volt               float64 `json:"vBat"`
+		WeightMel          float64 `json:"pMelg"`
+		TempVent           float64 `json:"tVent"`
+		Tresist            float64 `json:"tResist"`
 	}
 
 	var data Data
@@ -57,30 +57,30 @@ func updatedDataHandler(w http.ResponseWriter, r *http.Request) {
 	send := entity.Data{
 		Moisture: entity.Moisture{
 			Data: entity.Values{
-				Temp: strconv.Itoa(data.Moisture), // Conversão de int para string
+				Temp: strconv.FormatFloat(data.Moisture, 'f', 2, 64), // Conversão de int para string
 			},
 		},
 		OutsideTemperature: entity.OutsideTemperature{
 			Data: entity.Values{
-				Temp: strconv.Itoa(data.OutsideTemperature), // Conversão de int para string
+				Temp: strconv.FormatFloat(data.OutsideTemperature, 'f', 2, 64), // Conversão de int para string
 			},
 		},
 		Temperature: entity.Temperature{
 			Data: entity.Values{
-				Temp: strconv.Itoa(data.Temperature), // Conversão de int para string
+				Temp: strconv.FormatFloat(data.Temperature, 'f', 2, 64), // Conversão de int para string
 			},
 		},
 		Weight: entity.Weight{
-			Value: strconv.Itoa(data.Weight),
+			Value: strconv.FormatFloat(data.Weight, 'f', 2, 64),
 		},
 		Melg: entity.Melg{
 			Data: entity.ValuesNew{
-				Values: strconv.Itoa(data.WeightMel), // Conversão de int para string
+				Values: strconv.FormatFloat(data.WeightMel, 'f', 2, 64), // Conversão de int para string
 			},
 		},
-		Voltage:    entity.Voltage{Data: entity.ValuesNew{Values: strconv.Itoa(data.Volt)}},   // Conversão de int para string
-		Resistance: entity.Resist{Data: entity.ValuesNew{Values: strconv.Itoa(data.Tresist)}}, // Conversão de int para string
-		Vento:      entity.Vento{Data: entity.ValuesNew{Values: strconv.Itoa(data.TempVent)}}, // Conversão de int para string
+		Voltage:    entity.Voltage{Data: entity.ValuesNew{Values: strconv.FormatFloat(data.Volt, 'f', 2, 64)}},   // Conversão de int para string
+		Resistance: entity.Resist{Data: entity.ValuesNew{Values: strconv.FormatFloat(data.Tresist, 'f', 2, 64)}}, // Conversão de int para string
+		Vento:      entity.Vento{Data: entity.ValuesNew{Values: strconv.FormatFloat(data.TempVent, 'f', 2, 64)}}, // Conversão de int para string
 	}
 
 	err := manager.DataCreateInfo(ctx, send, chi.URLParam(r, "idExterno"))
