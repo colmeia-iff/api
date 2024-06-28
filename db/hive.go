@@ -208,7 +208,7 @@ func GetMoisture(ctx context.Context, id string) ([]entity.Moisture, error) {
 func ReturnDataInfoBySlug(ctx context.Context, slug string) ([]entity.HiveInitial, error) {
 	var data entity.HiveInitial
 	var dataArray []entity.HiveInitial
-	rows, err := infradb.Get().QueryContext(ctx, `select idexterno, Name, Slug, Description  from hive where slug = $1 `, slug)
+	rows, err := infradb.Get().QueryContext(ctx, `select idexterno, name, slug, description  from hive where slug = $1 `, slug)
 	if err != nil {
 		return nil, err
 	}
