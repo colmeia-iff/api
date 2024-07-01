@@ -37,7 +37,7 @@ func hiveHandler(w http.ResponseWriter, r *http.Request) {
 func updatedDataHandler(w http.ResponseWriter, r *http.Request) {
 	type Data struct {
 		Moisture           float64 `json:"uNinho"`
-		Temperature        float64 `json:"tNinho"`
+		Temperature        string  `json:"tNinho"`
 		OutsideTemperature float64 `json:"tExt"`
 		Weight             float64 `json:"pNinho"`
 		Volt               float64 `json:"vBat"`
@@ -67,7 +67,7 @@ func updatedDataHandler(w http.ResponseWriter, r *http.Request) {
 		},
 		Temperature: entity.Temperature{
 			Data: entity.Values{
-				Temp: strconv.FormatFloat(data.Temperature, 'f', 2, 64), // Conversão de int para string
+				Temp: data.Temperature, // Conversão de int para string
 			},
 		},
 		Weight: entity.Weight{
